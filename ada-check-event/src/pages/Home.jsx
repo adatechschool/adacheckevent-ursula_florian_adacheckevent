@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Button } from '../components/Button';
 
 export default function Home() {
 
@@ -28,6 +29,9 @@ export default function Home() {
                         <div key={id}>
                             <h2>{element.title}</h2>
                             <p>{element.description}</p>
+                            <Button url={element.url}>
+                                Plus de détails
+                            </Button>
                         </div>
                     )
                 })}
