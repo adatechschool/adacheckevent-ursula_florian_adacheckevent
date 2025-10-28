@@ -22,6 +22,7 @@ export default function Home() {
 
     return (
         <>
+        
             <div>
                 {values.map((element, id) => {
                     return (
