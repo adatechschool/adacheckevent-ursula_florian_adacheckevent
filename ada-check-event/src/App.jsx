@@ -6,16 +6,17 @@ import Saved from "./pages/Saved";
 import Categories from "./pages/Categories";
 
 export default function App() {
-  return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/saved" element={<Saved />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/Categories/:nom" element={<Categories />} />
-      </Routes>
-    </>
-  );
+
+    return (
+        <>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/saved" element={<Saved />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/categories/:name" element={<Categories />} />
+            </Routes>
+        </>
+    );
 }
