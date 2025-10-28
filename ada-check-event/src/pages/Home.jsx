@@ -1,11 +1,38 @@
-import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Home() {
+
+    const [values, setValues] = useState([]);
+
+    const loadData = async () => {
+        const res = await fetch("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=20");
+        const data = await res.json();
+        setValues(data.results)
+        console.log(data.results[0].title)
+    };
+
+    useEffect(() => {
+        loadData()
+    }, []);
+
+    if (values.length === 0) {
+        return <div>Loading...</div>
+    }
+
     return (
-        <>         
-        <div>
-          <h1>Welcome to Ada Check Event!</h1>  
-        </div> </>
+        <>
+            <div>
+                {values.map((element, id) => {
+                    return (
+                        <div key={id}>
+                            <h2>{element.title}</h2>
+                            <p>{element.description}</p>
+                        </div>
+                    )
+                })}
+            </div>
+        </>
 
     );
 };
