@@ -32,7 +32,7 @@ export const categoriesKeywords = [
 ];
 
 
-export function detectCategory(description,title =" ") {
+export default function detectCategory(description,title =" ") {
     const text = (description +" "+title).toLocaleLowerCase();
     for (const category of categoriesKeywords) {
         for (const words of category.keywords) {

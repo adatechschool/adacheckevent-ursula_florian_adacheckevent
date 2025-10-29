@@ -14,8 +14,7 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/saved" element={<Saved />} />
-                <Route path="/categories" element={<Categories />} />
-                <Route path="/categories/:name" element={<Categories />} />
+                <Route path="/categories/:slug" element={<Categories />} />
             </Routes>
         </>
     );
