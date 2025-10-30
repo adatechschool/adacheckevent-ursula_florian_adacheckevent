@@ -1,14 +1,6 @@
 export const Button = ({ url, children }) => {
 
-    const handleClick = () => {
-        if (url) {
-            window.location.href = url;
-            // window.open(url, '_blank', 'noopener,noreferrer');
-        }
-    };
-
     return (
-
         <a
             href={url}
             style={{
@@ -23,7 +15,6 @@ export const Button = ({ url, children }) => {
         >
             {children || 'Voir le lien'}
         </a>
-
     );
 
 };
