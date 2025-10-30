@@ -33,6 +33,7 @@ export default function Navbar() {
   <span className="text">Categories</span></button>
   {categoriesOpen &&(
     <ul>
+      {/* link va me permetre de naviguer d'une page à une autre sans recharger la page  */}
       <li><Link to="/Categories/culture">Culture & Spectacles</Link></li>
       <li><Link to="/Categories/immersif">Jeux & Expériences immersives</Link></li>
       <li><Link to="/Categories/sport">Sport & Bien-être</Link></li>
