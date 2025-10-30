@@ -1,31 +1,29 @@
-
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Button } from '../components/Button';
-import { cleanHTML } from '../utils/sanitize';
+import { ExpandableText } from '../components/ExpandableText';
 import LoadButton from './LoadButton';
 
-export default function Event ()  {
+export default function Event() {
     const [values, setValues] = useState([]);
-    const limit = 5;
-    const [offset , setOffset] = useState(0);
-    const [loading ,setLoading]= useState(false);
-    
-        const loadData = async () => {
-            setLoading(true);
+    const limit = 20;
+    const [offset, setOffset] = useState(0);
+    const [loading, setLoading] = useState(false)
+
+    const loadData = async () => {
+        setLoading(true);
         const res = await fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=${limit}&offset=${offset}`);
         const data = await res.json();
-
-        if (offset === 0){
+        if (offset === 0) {
             setValues(data.results)
-        } else{
+        } else {
             setValues((element) => [...element, ...data.results]);
         }
-        setLoading(false);
+        setLoading(false)
     };
-const loadMore= ()=>{
-    setOffset((element)=> element + limit)
-}; 
+    const loadMore = () => {
+        setOffset((element) => element + limit)
+    };
     useEffect(() => {
         loadData()
     }, [offset]);
@@ -46,7 +44,7 @@ const loadMore= ()=>{
                             style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }}
                         />
 
-                        {/* <ExpandableText html={element.description} maxLength={250} /> */}
+                        <ExpandableText html={element.description} maxLength={250} />
 
                         <div style={{ marginTop: '1rem', textAlign: 'center' }}>
                             <Button url={element.url}>Plus de détails</Button>
@@ -54,9 +52,9 @@ const loadMore= ()=>{
                     </div>
                 ))
             )}
-            <LoadButton onClick={loadMore} loading={loading}
-            />
+
+            <LoadButton onClick={loadMore} loading={loading}/>
+        
         </div>
     );
 };
-

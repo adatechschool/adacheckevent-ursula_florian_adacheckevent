@@ -7,4 +7,3 @@ export default function LoadButton ({ onClick, loading }) {
         </div>
     );
 };
-
