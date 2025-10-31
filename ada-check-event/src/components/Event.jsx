@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Button } from '../components/Button';
-import { ExpandableText } from '../components/ExpandableText';
 import LoadButton from './LoadButton';
+import Card from './Card';
 
 export default function Event() {
     const [values, setValues] = useState([]);
@@ -35,26 +34,18 @@ export default function Event() {
                 <div>Loading...</div>
             ) : (
                 values.map((element, id) => (
-                    <div key={id} style={{ marginBottom: '2rem' }}>
-                        <h2>{element.title}</h2>
-
-                        <img
-                            src={element.cover_url}
-                            alt={element.title}
-                            style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }}
-                        />
-
-                        <ExpandableText html={element.description} maxLength={250} />
-
-                        <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-                            <Button url={element.url}>Plus de détails</Button>
-                        </div>
-                    </div>
+                    <Card
+                        key={id}
+                        title={element.title}
+                        cover_url={element.cover_url}
+                        description={element.description}
+                        url={element.url}
+                    />
                 ))
             )}
 
-            <LoadButton onClick={loadMore} loading={loading}/>
-        
+            <LoadButton onClick={loadMore} loading={loading} />
+
         </div>
     );
 };
