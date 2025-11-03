@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import detectCategory from '../utils/category';
-import Event from '../components/Event';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
