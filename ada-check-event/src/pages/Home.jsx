@@ -48,6 +48,11 @@ export default function Home({ query, trigger }) {
         <>
             <div>
 
+                <h1 className="text-3xl font-bold underline">
+                    Hello world!
+                </h1>
+
+
                 {events.length === 0 ? (
                     <div>Loading...</div>
                 ) : (
