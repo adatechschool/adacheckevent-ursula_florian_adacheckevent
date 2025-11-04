@@ -2,16 +2,19 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import LoadButton from './LoadButton';
 import Card from './Card';
+import Navbar from './Navbar';
 
 export default function Event() {
     const [values, setValues] = useState([]);
     const limit = 20;
     const [offset, setOffset] = useState(0);
-    const [loading, setLoading] = useState(false)
-
-    const loadData = async () => {
+    const [loading, setLoading] = useState(false);
+   
+    const loadData = async (query="") => {
         setLoading(true);
-        const res = await fetch(`https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?limit=${limit}&offset=${offset}`);
+         const encodedQuery = encodeURIComponent(query.trim());
+  const url = `https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/que-faire-a-paris-/records?where=${encodedQuery ? `search("${encodedQuery}")` : ""}&limit=5`;
+        const res = await fetch(url);
         const data = await res.json();
         if (offset === 0) {
             setValues(data.results)
@@ -26,10 +29,13 @@ export default function Event() {
     useEffect(() => {
         loadData()
     }, [offset]);
-
+const handleSearch =(query) =>{
+loadData (query)
+}
     return (
+        <>
+        {/* <Navbar onSearch={handleSearch}/> */}
         <div>
-
             {values.length === 0 ? (
                 <div>Loading...</div>
             ) : (
@@ -47,5 +53,6 @@ export default function Event() {
             <LoadButton onClick={loadMore} loading={loading} />
 
         </div>
+        </>
     );
 };

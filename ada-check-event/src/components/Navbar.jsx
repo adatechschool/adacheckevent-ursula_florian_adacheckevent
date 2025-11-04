@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom';
 import { Home,  Search, Layers2, Heart , X} from 'lucide-react';
 import { useState } from 'react';
-export default function Navbar() {
+
+export default function Navbar({onSearch}) {
   const [searchOpen, setSearchOpen]= useState(false);
   const [categoriesOpen, setCategoriesOpen]= useState(false);
+  const [search, setSearch]= useState("");
+
+  const searchValue =(e) =>{
+e.preventDefault();
+const input = [search];
+onSearch(input);
+setSearch("")
+  }
+
   return (
     <>
      <nav className="navbar">
@@ -20,10 +30,17 @@ export default function Navbar() {
   ) : (
     <div>
       <Search size={18} />
-      <input type="text" placeholder="Rechercher un événement..." />
-      <button onClick={() => setSearchOpen(false)}>
+      <form onSubmit={searchValue}>
+        <input type="text" placeholder="Rechercher un événement..."
+       value={search} 
+       onChange={(e) => setSearch(e.target.value)} 
+      />
+      <button type="submit"></button>
+       </form>
+      
+      {/* <button onClick={() => setSearchOpen(false)}>
         <X size={18} />
-      </button>
+      </button> */}
     </div>
   )}
 </div>
