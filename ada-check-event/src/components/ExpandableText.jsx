@@ -4,33 +4,26 @@ import { cleanHTML } from '../utils/sanitize';
 export function ExpandableText({ html, maxLength = 200 }) {
     const [expanded, setExpanded] = useState(false);
 
-    // Nettoie le HTML
     const sanitized = cleanHTML(html);
-
-    // Tronque le texte si nécessaire
-    const shortText = sanitized.slice(0, maxLength);
+    const isTruncated = sanitized.length > maxLength;
+    const shortText = isTruncated ? sanitized.slice(0, maxLength) : sanitized;
 
     return (
         <div>
             <div
                 dangerouslySetInnerHTML={{
-                    __html: expanded ? sanitized : `${shortText}...`,
+                    __html: expanded || !isTruncated ? sanitized : `${shortText}...`,
                 }}
             />
 
-            <button
-                onClick={() => setExpanded(!expanded)}
-                style={{
-                    marginTop: '0.5rem',
-                    background: 'none',
-                    border: 'none',
-                    color: '#007bff',
-                    cursor: 'pointer',
-                    textDecoration: 'underline',
-                }}
-            >
-                {expanded ? 'Voir moins' : 'Voir plus'}
-            </button>
+            {isTruncated && (
+                <button
+                    onClick={() => setExpanded(!expanded)}
+                    className="mt-2 bg-transparent border-none text-blue-600 cursor-pointer underline"
+                >
+                    {expanded ? 'Voir moins' : 'Voir plus'}
+                </button>
+            )}
         </div>
     );
 }

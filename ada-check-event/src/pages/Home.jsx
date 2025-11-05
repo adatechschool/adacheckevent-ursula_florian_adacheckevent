@@ -48,23 +48,20 @@ export default function Home({ query, trigger }) {
         <>
             <div>
 
-                <h1 className="text-3xl font-bold underline">
-                    Hello world!
-                </h1>
-
-
                 {events.length === 0 ? (
                     <div>Loading...</div>
                 ) : (
-                    events.map((element) => (
-                        <Card
-                            key={element.id || element.event_id}
-                            title={element.title}
-                            cover_url={element.cover_url}
-                            description={element.description}
-                            url={element.url}
-                        />
-                    ))
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-7">
+                        {events.map((element) => (
+                                <Card
+                                    key={element.id || element.event_id}
+                                    title={element.title}
+                                    cover_url={element.cover_url}
+                                    description={element.description}
+                                    url={element.url}
+                                />
+                        ))}
+                    </div>
                 )}
 
                 <LoadButton onClick={loadMoreEvent} loading={loading} />

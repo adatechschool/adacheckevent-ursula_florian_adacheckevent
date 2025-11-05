@@ -1,20 +1,20 @@
 export const Button = ({ url, children }) => {
-
     return (
         <a
             href={url}
-            style={{
-                display: 'inline-block',
-                padding: '10px 20px',
-                backgroundColor: '#007bff',
-                color: '#fff',
-                borderRadius: '5px',
-                textDecoration: 'none',
-                fontWeight: 'bold',
-            }}
+            className="
+                inline-block
+                px-5 py-2.5
+                bg-blue-600
+                text-white
+                rounded
+                no-underline
+                font-bold
+                hover:bg-blue-700
+                transition-colors duration-300
+            "
         >
             {children || 'Voir le lien'}
         </a>
     );
-
 };
