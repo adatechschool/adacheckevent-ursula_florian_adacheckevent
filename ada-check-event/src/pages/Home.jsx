@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import LoadButton from '../components/LoadButton';
 
-export default function Home({ query, trigger }) {
+export default function Home({ query, trigger, favorites, toggleFavorite }) {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
     const [offset, setOffset] = useState(0);
@@ -58,6 +58,10 @@ export default function Home({ query, trigger }) {
                             cover_url={element.cover_url}
                             description={element.description}
                             url={element.url}
+                            element= {events}
+                            isFavorite={favorites?.includes(element.id || element.event_id)}  // Vérifie si favori
+                            toggleFavorite={toggleFavorite}  // Passe la fonction
+                            event={element}  // Passe l'objet complet
                         />
                     ))
                 )}
