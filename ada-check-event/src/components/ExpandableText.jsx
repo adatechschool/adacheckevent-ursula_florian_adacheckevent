@@ -17,7 +17,7 @@ export function ExpandableText({ html, maxLength = 200 }) {
             />
 
             {isTruncated && (
-                <button
+                <button 
                     onClick={() => setExpanded(!expanded)}
                     className="mt-2 bg-transparent border-none text-blue-600 cursor-pointer underline"
                 >

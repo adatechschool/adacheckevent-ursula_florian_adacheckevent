@@ -3,7 +3,7 @@ import Card from '../components/Card';  // Import de Card pour afficher les év�
 
 // Composant pour la page des favoris
 export default function Favorites({ toggleFavorite }) {  // Prop : toggleFavorite (fonction pour retirer)
-    const [favoriteEvents, setFavoriteEvents] = useState([]);  
+    const [favoriteEvents, setFavoriteEvents] = useState([]);
 
     // useEffect : Charge les événements favoris complets depuis localStorage 
     useEffect(() => {
@@ -18,23 +18,35 @@ export default function Favorites({ toggleFavorite }) {  // Prop : toggleFavorit
     };
 
     return (
-        <div>
-            <h1>Mes Favoris</h1>  
-            {favoriteEvents.length === 0 ? (  // Condition : si aucun favori
-                <p>Aucun favori enregistré.</p>  // Message
+        <div className="px-4">
+            <h1 className="text-2xl font-bold mb-6 text-center pt-7">Mes Favoris</h1>
+
+            {favoriteEvents.length === 0 ? ( // Condition : si aucun favori
+                <p className="text-center text-gray-600">Aucun favori enregistré.</p> // Message
             ) : (
-                favoriteEvents.map((event) => (  
-                    <Card
-                        key={event.id || event.event_id}  
-                        title={event.title}  
-                        cover_url={event.cover_url}  
-                        description={event.description} 
-                        url={event.url}  
-                        isFavorite={true}  // Toujours true ici (c'est un favori)
-                        toggleFavorite={() => removeFavorite(event)}  // Fonction pour retirer
-                        event={event}  // Objet complet
-                    />
-                ))
+                <div
+                    className="
+                        grid
+                        gap-6
+                        grid-cols-1
+                        sm:grid-cols-2
+                        lg:grid-cols-3
+                        xl:grid-cols-4
+                        "
+                >
+                    {favoriteEvents.map((event) => (
+                        <Card
+                            key={event.id || event.event_id}
+                            title={event.title}
+                            cover_url={event.cover_url}
+                            description={event.description}
+                            url={event.url}
+                            isFavorite={true} // Toujours true ici (c'est un favori)
+                            toggleFavorite={() => removeFavorite(event)} // Fonction pour retirer
+                            event={event} // Objet complet
+                        />
+                    ))}
+                </div>
             )}
         </div>
     );
